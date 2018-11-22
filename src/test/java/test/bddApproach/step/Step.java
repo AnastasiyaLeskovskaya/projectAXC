@@ -41,23 +41,28 @@ public class Step {
         new AboutPage().languageIconClick();
     }
 
+    @When("^User click DOMMark item$")
+    public void doMMarkItemClick() {
+        new AboutPage().doMarkItem();
+    }
+
     @And("^Chooses Chinese language item$")
     public void chineseLanguageClick() {
         new AboutPage().chineseLangClick();
     }
-//
-//    @And("^Return Main page$")
-//    public void returnToMainPage() {
-//        new AboutPage().returnMainPage();
-//    }
-//
+
+    @And("^Check, that home language is English$")
+    public void verifyEngLanguage() {
+        Assert.assertEquals(new AboutPage().verifyLanguage(), "English", "Language is not English");
+    }
+
     @Then("^About page is opened$")
     public void verifyAboutPage() {
         Assert.assertTrue(new AboutPage().isLabelDisplayed(), "About page is non opened");
     }
 
-    @Then("^Home language is Chinese$")
-    public void verifyLanguage() {
+    @Then("^Home language is changed on Chinese$")
+    public void verifyChinLanguage() {
         Assert.assertEquals(new AboutPage().verifyLanguage(), "Chinese", "Language is not change");
     }
 

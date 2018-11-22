@@ -2,6 +2,7 @@ package test.page;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import test.exception.LanguageDefinitionException;
 import webdriver.WebDriverHolder;
 
 public class AboutPage extends BasePage {
@@ -21,9 +22,9 @@ public class AboutPage extends BasePage {
     private WebElement aboutClick;
 
     @FindBy(xpath = "//*[@id='logo']/a/img[2]")
-    private WebElement returnMainPageButton;
+    private WebElement doMarkItem;
 
-    @FindBy(css = "//*[@id='masthead']//i[@class='image-icon']//img")
+    @FindBy(xpath = "//*[@id='masthead']//i[@class='image-icon']//img")
     private WebElement currentLanguage;
 
     public void openBrowser() {
@@ -44,19 +45,22 @@ public class AboutPage extends BasePage {
         return this;
     }
 
-    public String verifyLanguage() {
+    public AboutPage doMarkItem(){
+        doMarkItem.click();
+        return this;
+    }
 
-        //String currentLang = currentLanguage.getText();
-        System.out.println("JKJKJ"+currentLanguage.getTagName());
-//        try {
-//            switch (currentLang) {
-//                case "English":
-//                    return "English";
-//                case "中文":
-//                    return "Chinese";
-//            }throw new LanguageDefinitionException();
-//        }catch (LanguageDefinitionException e){
+    public String verifyLanguage() {
+        String currentLang = currentLanguage.getAttribute("alt");
+        try {
+            switch (currentLang) {
+                case "English":
+                    return "English";
+                case "中文":
+                    return "Chinese";
+            }throw new LanguageDefinitionException();
+        }catch (LanguageDefinitionException e){
             return "";
         }
-  //  }
+    }
 }
